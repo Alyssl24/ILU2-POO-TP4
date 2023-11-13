@@ -3,8 +3,8 @@ package scenarioTest;
 import produit.Poisson;
 import produit.Produit;
 import produit.Sanglier;
-import villagegaulois.Etal;
-import villagegaulois.IEtal;
+import villagegauloisold.Etal;
+import villagegauloisold.IEtal;
 
 public class ScenarioTest {
 	public static void main(String[] args) {
