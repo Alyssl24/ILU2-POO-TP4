@@ -13,4 +13,8 @@ public class Poisson extends Produit{
 		chaine.append(super.nom + " pêché " + datePeche + ".\n");
 		return chaine.toString();
 	}
+	
+	public double calculerPrix(int prix) {
+		return prix;
+	}
 }

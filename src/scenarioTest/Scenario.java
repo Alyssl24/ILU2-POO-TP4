@@ -1,14 +1,54 @@
 package scenarioTest;
 
 import personnages.Gaulois;
-import villagegauloisold.Etal;
+import produit.Poisson;
+import produit.Produit;
+import produit.Sanglier;
+import villagegaulois.DepenseMarchand;
+import villagegaulois.Village;
+import villagegaulois.Etal;
 
 public class Scenario {
 
 	public static void main(String[] args) {
 
 		// TODO Partie 4 : creer de la classe anonyme Village
-
+		Village village = new Village() {
+			private Etal[] etals = new Etal[3];
+			private int nbEtals = 0;
+			
+			@Override
+			public <P extends Produit> boolean installerVendeur(Etal<P> etal, Gaulois vendeur, P[] produit, int prix) {
+				etal.installerVendeur(vendeur, produit, prix);
+				etals[nbEtals] = etal;
+				nbEtals++;
+				return true;
+				
+			}
+			
+			@Override
+			public DepenseMarchand[] acheterProduit(String produit, int quantiteSouhaitee) {
+				DepenseMarchand[] depense = new DepenseMarchand[3];
+				double prixPaye;
+				int quantiteAVendre;
+				for (int i = 0; i < nbEtals && quantiteSouhaitee != 0; i++) {
+					quantiteAVendre = etals[i].contientProduit(produit, quantiteSouhaitee);
+					prixPaye = etals[i].acheterProduit(quantiteAVendre);
+					depense[i] = new DepenseMarchand(etals[i].getVendeur(), quantiteAVendre, produit, prixPaye);
+					quantiteSouhaitee -= quantiteAVendre;
+				}
+				return depense;
+			}
+			
+			public String toString() {
+				StringBuilder chaine = new StringBuilder();
+				chaine.append("ETAT MARCHE\n\n");
+				for (int i = 0; i < nbEtals; i++) {
+					chaine.append(etals[i].etatEtal()); 
+				}
+				return chaine.toString();
+			}
+		};
 		// fin
 
 		Gaulois ordralfabetix = new Gaulois("Ordralfabétix", 9);
@@ -34,12 +74,12 @@ public class Scenario {
 		village.installerVendeur(etalSanglierObelix, obelix, sangliersObelix, 8);
 		village.installerVendeur(etalPoisson, ordralfabetix, poissons, 5);
 
-		System.out.println(village);
+		System.out.println(village.toString());
 
 		DepenseMarchand[] depense = village.acheterProduit("sanglier", 3);
 
 		for (int i = 0; i < depense.length && depense[i] != null; i++) {
-			System.out.println(depense[i]);
+			System.out.println(depense[i].toString());
 		}
 
 		System.out.println(village);
