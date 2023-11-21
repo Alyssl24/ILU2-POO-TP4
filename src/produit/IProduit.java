@@ -1,9 +1,7 @@
 package produit;
 
 public interface IProduit {
-
 	String getNom();
-
-	void description();
-
+	String description();
+	double calculerPrix(int prix);
 }

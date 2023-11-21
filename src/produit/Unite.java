@@ -8,4 +8,8 @@ public enum Unite {
 	private Unite(String nom) {
 		this.nom = nom;
 	}
+	
+	public String getUnite() {
+		return this.nom;
+	}
 }

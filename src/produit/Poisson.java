@@ -8,7 +8,9 @@ public class Poisson extends Produit{
 		this.datePeche = datePeche;
 	}
 	
-	public void description() {
-		System.out.println(super.nom + " pêchés " + datePeche + ".\n");
+	public String description() {
+		StringBuilder chaine = new StringBuilder();
+		chaine.append(super.nom + " pêché " + datePeche + ".\n");
+		return chaine.toString();
 	}
 }
