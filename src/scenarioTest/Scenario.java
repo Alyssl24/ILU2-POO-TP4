@@ -82,7 +82,7 @@ public class Scenario {
 			System.out.println(depense[i].toString());
 		}
 
-		System.out.println(village);
+		System.out.println(village.toString());
 
 	}
 
